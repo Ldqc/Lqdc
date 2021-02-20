@@ -43,11 +43,31 @@ public class StartPanel extends JPanel implements Runnable{
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 buttonState = BUTTON_NORMAL;
-                if (e.getX() >= 506 && e.getX() <= 756 && e.getY() >= 306 && e.getY() <= 466)
+                if (e.getX() >= 506 && e.getX() <= 756 && e.getY() >= 306 && e.getY() <= 466){
+                    //此处为点击了开始按钮后的操作
+                    startGame();
                     JOptionPane.showMessageDialog(null,"开发中....");
+                }
+
             }
 
         });
+    }
+
+    /**
+     *此方法为开始游戏并且初始化游戏数据的函数
+     */
+    void startGame(){
+        HallPanel hallPanel = new HallPanel();
+        Thread hallThread = new Thread(hallPanel);
+        hallThread.start();
+        JFrame hallFrame = new JFrame("游戏大厅");
+        hallFrame.add(hallPanel);
+        hallFrame.setSize(1280+8+8,720+30+8);//上边框30其他边框8
+        hallFrame.setLocationRelativeTo(null);
+        hallFrame.setResizable(false);
+        hallFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        hallFrame.setVisible(true);
     }
 
     /**
